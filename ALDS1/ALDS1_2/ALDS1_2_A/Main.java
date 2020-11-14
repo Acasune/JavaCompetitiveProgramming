@@ -1,3 +1,8 @@
+/*
+ *  ALDS1_2_A: Bubble Sort
+ *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/2/ALDS1_2_A
+ */
+
 package ALDS1.ALDS1_2.ALDS1_2_A;
 
 import java.util.Scanner;

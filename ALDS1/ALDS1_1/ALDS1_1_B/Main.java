@@ -1,7 +1,10 @@
+/*
+ *  ALDS1_1_B: Greatest Common Divisor
+ *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/1/ALDS1_1_B
+ */
+
 package ALDS1.ALDS1_1.ALDS1_1_B;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Integer.min;
