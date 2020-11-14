@@ -1,9 +1,9 @@
 /*
- *  ALDS1_1_D: Maximum Profit
+ *  ALDS1_2_D: Maximum Profit
  *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/1/ALDS1_1_D
  */
 
-package ALDS1.ALDS1_1.ALDS1_D;
+package ALDS1.ALDS1_2.ALDS1_2_D;
 
 import java.util.Scanner;
 
