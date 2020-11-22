@@ -1,5 +1,5 @@
 /*
- *  ALDS1_3_3:Doubly Linked List
+ *  ALDS1_3_C:Doubly Linked List
  *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_3_C
  */
 
