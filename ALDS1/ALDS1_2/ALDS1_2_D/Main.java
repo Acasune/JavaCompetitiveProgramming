@@ -1,40 +1,66 @@
 /*
- *  ALDS1_2_D: Maximum Profit
- *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/1/ALDS1_1_D
+ *  ALDS1_2_D: Shell Sort
+ *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/2/ALDS1_2_D
  */
 
 package ALDS1.ALDS1_2.ALDS1_2_D;
 
 import java.util.Scanner;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
 
 public class Main {
+	static int[] A,G;
+	static int cnt=0;
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int[] array=new int[n];
-		for (int i=0;i<n;i++){
-			array[i]=sc.nextInt();
+		int N = sc.nextInt();
+		A=new int[N];
+		for (int i=0;i<N;i++){
+			A[i]=sc.nextInt();
 		}
-		int ans =solve(array,n);
-		System.out.println(ans);
+		shellSort(N);
+		System.out.println(cnt);
+		for (int i=0;i<N;i++){
+			System.out.println(A[i]);
+		}
 	}
-	private static int solve(int[] arr,int n){
-		int[] minArr=new int[n], maxArr=new int[n];
-		minArr[0]=arr[0];
-		maxArr[n-1]=arr[n-1];
-		for (int i=1;i<n;i++){
-			minArr[i]=min(minArr[i-1],arr[i]);
+
+	private static void shellSort(int n){
+		int[] tmpG=new int[n];
+		int sizeG=0, h=1;
+		while(true){
+			if(h>n)break;
+			tmpG[sizeG]=h;
+			sizeG++;
+			h=3*h+1;
 		}
-		for (int i=n-2;-1<i;i--){
-			maxArr[i]=max(maxArr[i+1],arr[i]);
+		G=new int[sizeG];
+		for(int i=0;i<sizeG;i++){
+			G[i]=tmpG[sizeG-i-1];
 		}
-		int ans=-1_000_000_000;
-		for (int i=0;i<n-1;i++){
-			ans=max(-minArr[i]+maxArr[i+1],ans);
+		System.out.println(sizeG);
+		System.out.print(G[0]);
+		for(int i=1;i<sizeG;i++){
+			System.out.print(" "+G[i]);
 		}
-		return ans;
+		System.out.println();
+		for(int i=0;i<sizeG;i++){
+			insertionSort(n,G[i]);
+		}
+
+	}
+
+	private static void insertionSort(int n, int g){
+		for(int i=g;i<=n-1;i++){
+			int v=A[i];
+			int j= i-g;
+			while(j>=0 && A[j]>v){
+				A[j+g]=A[j];
+				j=j-g;
+				cnt++;
+			}
+			A[j+g]=v;
+		}
 	}
 }
