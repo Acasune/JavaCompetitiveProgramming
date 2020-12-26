@@ -91,61 +91,61 @@ class BinaryTree{
         }
     }
 
-        boolean find(int target){
-            Node candidate = root;
-            while(true){
-                if(target < candidate.num){
-                    if(candidate.left == null){
-                        return false;
-                    }
-                    else candidate = candidate.left;
+    boolean find(int target){
+        Node candidate = root;
+        while(true){
+            if(target < candidate.num){
+                if(candidate.left == null){
+                    return false;
                 }
-                else if(target == candidate.num)return true;
-                else{
-                    if(candidate.right == null){
-                        return false;
-                    }
-                    else candidate = candidate.right;
+                else candidate = candidate.left;
+            }
+            else if(target == candidate.num)return true;
+            else{
+                if(candidate.right == null){
+                    return false;
                 }
+                else candidate = candidate.right;
             }
         }
+    }
 
     void delete(int key){
-      Node parent = null;
-      Node child = root;
+        Node parent = null;
+        Node child = root;
 
-      while(child != null && child.num != key){
-        parent = child;
-        if(key < parent.num){
-            child = parent.left;
+        while(child != null && child.num != key){
+            parent = child;
+            if(key < parent.num){
+                child = parent.left;
+            }
+            else{
+                child = parent.right;
+            }
+
         }
-        else{
-            child = parent.right;
+
+        if(child==null) return;
+
+        if(child.left==null){
+            if(key<parent.num) parent.left = child.right;
+            else parent.right = child.right;
         }
-
-      }
-
-      if(child==null) return;
-
-      if(child.left==null){
-          if(key<parent.num) parent.left = child.right;
-          else parent.right = child.right;
-      }
-      else if(child.right == null){
-          if(key<parent.num) parent.left = child.left;
-          else parent.right = child.left;
-      }
-      else {
-        parent = child;
-        Node nextNode = child.right;
-        while (nextNode.left != null) {
-            parent = nextNode;
-            nextNode = nextNode.left;
+        else if(child.right == null){
+            if(key<parent.num) parent.left = child.left;
+            else parent.right = child.left;
         }
-        child.num = nextNode.num;
-        if (nextNode.num < parent.num) parent.left = nextNode.right;
-        else parent.right = nextNode.right;
-      }
+        else {
+            parent = child;
+            Node nextNode = child.right;
+            while (nextNode.left != null) {
+                parent = nextNode;
+                nextNode = nextNode.left;
+            }
+            child.num = nextNode.num;
+            if (nextNode.num < parent.num) parent.left = nextNode.right;
+            else parent.right = nextNode.right;
+        }
     }
 }
 
