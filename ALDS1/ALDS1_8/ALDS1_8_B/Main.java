@@ -89,20 +89,20 @@ class BinaryTree{
     }
 
     boolean find(int target){
-      Node institute = root;
+      Node candidate = root;
       while(true){
-        if(target < institute.num){
-          if(institute.left == null){
+        if(target < candidate.num){
+          if(candidate.left == null){
             return false;
           }
-          else institute = institute.left;
+          else candidate = candidate.left;
         }
-        else if(target == institute.num)return true;
+        else if(target == candidate.num)return true;
         else{
-            if(institute.right == null){
+            if(candidate.right == null){
                 return false;
             }
-            else institute = institute.right;
+            else candidate = candidate.right;
         }
       }
     }
