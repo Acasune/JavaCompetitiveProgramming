@@ -1,0 +1,120 @@
+/*
+ *  ALDS1_8_B: Binary Search Tree Ⅱ
+ *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_8_B
+ */
+
+package ALDS1.ALDS1_8.ALDS1_8_B;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    static int N;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        BinaryTree tree = new BinaryTree(N);
+
+        for (int i = 0; i < N; i++) {
+            String type = sc.next();
+            if (type.equals("insert")) {
+                if (tree.root == null) {
+                    tree.root = new Node(sc.nextInt());
+                } else {
+                    tree.insert(sc.nextInt());
+                }
+            }
+            else if (type.equals("find")){
+                System.out.println(tree.find(sc.nextInt())?"yes":"no");
+            }
+            else {
+                StringBuilder sb = new StringBuilder();
+                ArrayList<Integer> inList = new ArrayList<>();
+                ArrayList<Integer> preList = new  ArrayList<>();
+                get(tree.root, inList, preList);
+                for (int x : inList) {
+                    sb.append(" ").append(x);
+                }
+                sb.append("\n");
+                for (int x : preList) {
+                    sb.append(" ").append(x);
+                }
+                sb.append("\n");
+                System.out.print(sb);
+            }
+        }
+
+    }
+    static void get(Node x, ArrayList<Integer> inList, ArrayList<Integer> preList) {
+        preList.add(x.num);
+        if (x.left != null) {
+            get(x.left, inList, preList);
+        }
+        inList.add(x.num);
+        if (x.right != null) {
+            get(x.right, inList, preList);
+        }
+    }
+}
+
+class BinaryTree{
+    int size;
+    Node root;
+    BinaryTree(int size){
+        this.size=size;
+    }
+
+    void insert(int a){
+        Node node = new Node(a);
+        Node parent = root;
+        while(true){
+            if(a<parent.num){
+                if(parent.left==null){
+                    node.parent=parent;
+                    parent.left=node;
+                    return;
+                }
+                parent=parent.left;
+            }
+            else{
+                if(parent.right==null){
+                    node.parent=parent;
+                    parent.right=node;
+                    return;
+                }
+                parent=parent.right;
+            }
+        }
+    }
+
+    boolean find(int target){
+      Node institute = root;
+      while(true){
+        if(target < institute.num){
+          if(institute.left == null){
+            return false;
+          }
+          else institute = institute.left;
+        }
+        else if(target == institute.num)return true;
+        else{
+            if(institute.right == null){
+                return false;
+            }
+            else institute = institute.right;
+        }
+      }
+    }
+}
+
+class Node{
+    int num;
+    Node parent;
+    Node left;
+    Node right;
+    Node(int num){
+        this.num=num;
+    }
+
+}
