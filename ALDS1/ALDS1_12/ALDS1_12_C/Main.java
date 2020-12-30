@@ -1,9 +1,9 @@
 /*
- *  ALDS1_11_B: Single Source Shortest Path Ⅰ
- *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_12_B
+ *  ALDS1_11_B: Single Source Shortest Path Ⅱ
+ *  URL: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_12_C
  */
 
-package ALDS1.ALDS1_12.ALDS1_12_B;
+package ALDS1.ALDS1_12.ALDS1_12_C;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -25,7 +25,6 @@ public class Main {
             }
         }
 
-        int res = 0;
         boolean[] used = new boolean[N];
         int[] minCost = new int[N];
         Arrays.fill(used, false);
