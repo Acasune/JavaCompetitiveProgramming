@@ -9,62 +9,47 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    static int INF=Integer.MAX_VALUE/10;
 
     public static void main(String[] args) {
-        new Main().run();
-    }
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
 
-    int N = 8;
-    int[] row = new int[N];
-    boolean[] col = new boolean[N];
-    boolean[] dpos = new boolean[2 * N - 1];
-    boolean[] dneg = new boolean[2 * N - 1];
-
-    boolean[][] map = new boolean[N][N];
-
-    void initialize() {
-        Arrays.fill(row, -1);
-    }
-
-    private void run() {
-        Scanner scanner = new Scanner(System.in);
-        initialize();
-        int k = scanner.nextInt();
-        for (int i = 0; i < k; i++) {
-            int r = scanner.nextInt();
-            int c = scanner.nextInt();
-            row[r] = c;
-            col[c] = dpos[r + c] = dneg[r - c + N - 1] = true;
-        }
-        recursive(0);
-
-    }
-
-    private void recursive(int i) {
-        if(i==N){
-            printBoard();
-            return;
-        }
-        if(row[i]!=-1){
-            recursive(i+1);
-        }
-        for(int j=0;j<N;j++){
-            if(col[j]||dpos[i+j]||dneg[i-j+N-1]||row[i]!=-1) continue;
-            row[i]=j;
-            col[j]=dpos[i+j]=dneg[i-j+N-1]=true;
-            recursive(i+1);
-            row[i]=-1;
-            col[j]=dpos[i+j]=dneg[i-j+N-1]=false;
-        }
-    }
-
-    private void printBoard() {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(row[i] == j ? "Q" : ".");
+        int[][] cost = new int[N][N];
+        for (int i=0;i<N;i++)for (int j=0;j<N;j++)cost[i][j]=INF;
+        for (int i=0;i<N;i++){
+            int u=sc.nextInt(), k=sc.nextInt();
+            for (int j=0;j<k;j++){
+                int v=sc.nextInt(), c=sc.nextInt();
+                cost[u][v]=c;
             }
-            System.out.println();
         }
+
+        boolean[] used = new boolean[N];
+        int[] minCost = new int[N];
+        Arrays.fill(used, false);
+        Arrays.fill(minCost,INF);
+        minCost[0] = 0;
+
+        while (true){
+            int v=-1;
+            for (int u=0; u<N;u++){
+                if(!used[u]&&(v==-1||minCost[u]<minCost[v]))v=u;
+            }
+
+            if(v==-1) break;
+            used[v]=true;
+
+            for (int u=0; u<N;u++){
+                minCost[u] = Integer.min(minCost[u],minCost[v]+cost[v][u]);
+            }
+
+        }
+
+        for (int i=0;i<N;i++){
+            System.out.println(i+" "+minCost[i]);
+        }
+
     }
 
 }
