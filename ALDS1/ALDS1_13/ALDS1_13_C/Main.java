@@ -81,9 +81,6 @@ public class Main {
 
     }
 
-
-
-
     private void run() {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < 4; i++) {
