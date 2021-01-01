@@ -6,6 +6,7 @@
 package ALDS1.ALDS1_15.ALDS1_15_B;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -16,52 +17,34 @@ public class Main {
     public static void run() {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        double W = sc.nextInt();
+        int[][] arr = new int[N][2];
 
-        Item[] items = new Item[N];
-        for(int i = 0; i < N; i++){
-            int value = sc.nextInt();
-            int weight = sc.nextInt();
-
-            items[i] = new Item(value, weight);
+        for (int i = 0 ; i < N; i++){
+            arr[i][0] = sc.nextInt();
+            arr[i][1] = sc.nextInt();
         }
 
-        Arrays.sort(items);
+        Arrays.sort(arr, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if(o1[1] != o2[1])
+                    return o1[1] - o2[1];
+                else
+                    return o1[0] - o2[1];
+            }
+        });
+        int ans = 1;
+        int right = arr[0][1];
 
-        double result = 0;
-        for(int i = 0; i < N && W > 0 ; i++){
-            double w1 = Math.min(items[i].weight, W);
-            result += w1 * items[i].valuePerWeight;
-            W -= w1;
+        for (int i = 1; i < N; i++) {
+            if (right < arr[i][0]){
+                ans++;
+                right = arr[i][1];
+            }
+
         }
 
-        System.out.printf("%.8f\n", result);
-    }
-
-}
-
-class Item implements Comparable<Item>{
-    int value;
-    int weight;
-    double valuePerWeight;
-
-    Item(int v, int w){
-        value = v;
-        weight = w;
-        valuePerWeight = (double)value/weight;
-    }
-
-    @Override
-    public int compareTo(Item item1) {
-        if(this.valuePerWeight < item1.valuePerWeight){
-            return 1;
-        }
-        else if(this.valuePerWeight > item1.valuePerWeight){
-            return -1;
-        }
-        else {
-            return 0;
-        }
+        System.out.println(ans);
     }
 
 }
